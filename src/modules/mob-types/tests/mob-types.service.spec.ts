@@ -1,5 +1,5 @@
+import { MobTypesService } from '@mob-types/services/mob-types.service'
 import { Test, TestingModule } from '@nestjs/testing'
-import { MobTypesService } from './mob-types.service'
 
 describe('MobTypesService', () => {
   let service: MobTypesService

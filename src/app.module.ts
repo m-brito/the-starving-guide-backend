@@ -1,19 +1,20 @@
 import { Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config'
-import { UsersModule } from './modules/users/users.module'
-import { ThemesModule } from './modules/themes/themes.module'
-import { VotingsModule } from './modules/votings/votings.module'
-import { VotingOptionsModule } from './modules/voting-options/voting-options.module'
-import { CharactersModule } from './modules/characters/characters.module'
-import { FoodsModule } from './modules/foods/foods.module'
-import { PlacesModule } from './modules/places/places.module'
+import { AuthModule } from './auth/auth.module'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { MobsModule } from './modules/mobs/mobs.module'
 import { ItemsModule } from './modules/items/items.module'
+import { VotesModule } from './modules/votes/votes.module'
+import { UsersModule } from './modules/users/users.module'
+import { FoodsModule } from './modules/foods/foods.module'
+import { BiomesModule } from './modules/biomes/biomes.module'
+import { ThemesModule } from './modules/themes/themes.module'
+import { PlacesModule } from './modules/places/places.module'
+import { VotingsModule } from './modules/votings/votings.module'
 import { SeasonsModule } from './modules/seasons/seasons.module'
 import { MobTypesModule } from './modules/mob-types/mob-types.module'
-import { MobsModule } from './modules/mobs/mobs.module'
-import { VotesModule } from './modules/votes/votes.module'
-import { BiomesModule } from './modules/biomes/biomes.module'
+import { CharactersModule } from './modules/characters/characters.module'
+import { VotingOptionsModule } from './modules/voting-options/voting-options.module'
 
 @Module({
   imports: [
@@ -47,7 +48,8 @@ import { BiomesModule } from './modules/biomes/biomes.module'
     SeasonsModule,
     MobTypesModule,
     MobsModule,
-    VotesModule
+    VotesModule,
+    AuthModule
   ],
   controllers: [],
   providers: []
