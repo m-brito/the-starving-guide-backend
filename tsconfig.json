@@ -114,7 +114,14 @@
       "@votes/tests/*": ["src/modules/votes/tests/*"],
 
       "@shared/*": ["src/shared/*"],
-      "@filters/*": ["src/shared/filters/*"]
+      "@filters/*": ["src/shared/filters/*"],
+
+      "@auth/dto/*": ["src/auth/dtos/*"],
+      "@auth/test/*": ["src/auth/tests/*"],
+      "@auth/types/*": ["src/auth/types/*"],
+      "@auth/services/*": ["src/auth/services/*"],
+      "@auth/controllers*": ["src/auth/controllers*"],
+      "@auth/strategies/*": ["src/auth/strategies/*"]
     }
   }
 }

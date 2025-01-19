@@ -1,5 +1,18 @@
 // External Libraries
-import { Controller, Get, Post, Param, Body, Put, Delete } from '@nestjs/common'
+import {
+  Put,
+  Get,
+  Body,
+  Post,
+  Param,
+  Delete,
+  UseGuards,
+  Controller,
+  Request
+} from '@nestjs/common'
+
+// Auth
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 
 // Entities
 import { User } from 'src/modules/users/entities/user.entity'
@@ -7,13 +20,19 @@ import { User } from 'src/modules/users/entities/user.entity'
 // Services
 import { UsersService } from 'src/modules/users/services/users.service'
 
+// Dtos
+import { CreateUserDto } from '@users/dtos/create-user.dto'
+import { UserDto } from '@users/dtos/user.dto'
+
 @Controller('users')
+@UseGuards(JwtAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  findAll(): Promise<User[]> {
-    return this.usersService.findAll()
+  findAll(@Request() req): Promise<UserDto[]> {
+    const loggedUser = req.user
+    return this.usersService.findAll(loggedUser)
   }
 
   @Get(':id')
@@ -22,8 +41,8 @@ export class UsersController {
   }
 
   @Post()
-  create(@Body() user: Partial<User>): Promise<User> {
-    return this.usersService.create(user)
+  async createUser(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto)
   }
 
   @Put(':id')
