@@ -1,0 +1,120 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@users/dtos/*": ["src/modules/users/dtos/*"],
+      "@users/entities/*": ["src/modules/users/entities/*"],
+      "@users/controllers/*": ["src/modules/users/controllers/*"],
+      "@users/services/*": ["src/modules/users/services/*"],
+      "@users/repositories/*": ["src/modules/users/repositories/*"],
+      "@users/tests/*": ["src/modules/users/tests/*"],
+
+      "@themes/dtos/*": ["src/modules/themes/dtos/*"],
+      "@themes/entities/*": ["src/modules/themes/entities/*"],
+      "@themes/controllers/*": ["src/modules/themes/controllers/*"],
+      "@themes/services/*": ["src/modules/themes/services/*"],
+      "@themes/repositories/*": ["src/modules/themes/repositories/*"],
+      "@themes/tests/*": ["src/modules/themes/tests/*"],
+
+      "@votings/dtos/*": ["src/modules/votings/dtos/*"],
+      "@votings/entities/*": ["src/modules/votings/entities/*"],
+      "@votings/controllers/*": ["src/modules/votings/controllers/*"],
+      "@votings/services/*": ["src/modules/votings/services/*"],
+      "@votings/repositories/*": ["src/modules/votings/repositories/*"],
+      "@votings/tests/*": ["src/modules/votings/tests/*"],
+
+      "@voting-options/dtos/*": ["src/modules/voting-options/dtos/*"],
+      "@voting-options/entities/*": ["src/modules/voting-options/entities/*"],
+      "@voting-options/controllers/*": [
+        "src/modules/voting-options/controllers/*"
+      ],
+      "@voting-options/services/*": ["src/modules/voting-options/services/*"],
+      "@voting-options/repositories/*": [
+        "src/modules/voting-options/repositories/*"
+      ],
+      "@voting-options/tests/*": ["src/modules/voting-options/tests/*"],
+
+      "@characters/dtos/*": ["src/modules/characters/dtos/*"],
+      "@characters/entities/*": ["src/modules/characters/entities/*"],
+      "@characters/controllers/*": ["src/modules/characters/controllers/*"],
+      "@characters/services/*": ["src/modules/characters/services/*"],
+      "@characters/repositories/*": ["src/modules/characters/repositories/*"],
+      "@characters/tests/*": ["src/modules/characters/tests/*"],
+
+      "@foods/dtos/*": ["src/modules/foods/dtos/*"],
+      "@foods/entities/*": ["src/modules/foods/entities/*"],
+      "@foods/controllers/*": ["src/modules/foods/controllers/*"],
+      "@foods/services/*": ["src/modules/foods/services/*"],
+      "@foods/repositories/*": ["src/modules/foods/repositories/*"],
+      "@foods/tests/*": ["src/modules/foods/tests/*"],
+
+      "@places/dtos/*": ["src/modules/places/dtos/*"],
+      "@places/entities/*": ["src/modules/places/entities/*"],
+      "@places/controllers/*": ["src/modules/places/controllers/*"],
+      "@places/services/*": ["src/modules/places/services/*"],
+      "@places/repositories/*": ["src/modules/places/repositories/*"],
+      "@places/tests/*": ["src/modules/places/tests/*"],
+
+      "@items/dtos/*": ["src/modules/items/dtos/*"],
+      "@items/entities/*": ["src/modules/items/entities/*"],
+      "@items/controllers/*": ["src/modules/items/controllers/*"],
+      "@items/services/*": ["src/modules/items/services/*"],
+      "@items/repositories/*": ["src/modules/items/repositories/*"],
+      "@items/tests/*": ["src/modules/items/tests/*"],
+
+      "@biomes/dtos/*": ["src/biomes/dtos/*"],
+      "@biomes/entities/*": ["src/biomes/entities/*"],
+      "@biomes/controllers/*": ["src/biomes/controllers/*"],
+      "@biomes/services/*": ["src/biomes/services/*"],
+      "@biomes/repositories/*": ["src/biomes/repositories/*"],
+      "@biomes/tests/*": ["src/biomes/tests/*"],
+
+      "@seasons/dtos/*": ["src/modules/seasons/dtos/*"],
+      "@seasons/entities/*": ["src/modules/seasons/entities/*"],
+      "@seasons/controllers/*": ["src/modules/seasons/controllers/*"],
+      "@seasons/services/*": ["src/modules/seasons/services/*"],
+      "@seasons/repositories/*": ["src/modules/seasons/repositories/*"],
+      "@seasons/tests/*": ["src/modules/seasons/tests/*"],
+
+      "@mob-types/dtos/*": ["src/modules/mob-types/dtos/*"],
+      "@mob-types/entities/*": ["src/modules/mob-types/entities/*"],
+      "@mob-types/controllers/*": ["src/modules/mob-types/controllers/*"],
+      "@mob-types/services/*": ["src/modules/mob-types/services/*"],
+      "@mob-types/repositories/*": ["src/modules/mob-types/repositories/*"],
+      "@mob-types/tests/*": ["src/modules/mob-types/tests/*"],
+
+      "@mobs/dtos/*": ["src/modules/mobs/dtos/*"],
+      "@mobs/entities/*": ["src/modules/mobs/entities/*"],
+      "@mobs/controllers/*": ["src/modules/mobs/controllers/*"],
+      "@mobs/services/*": ["src/modules/mobs/services/*"],
+      "@mobs/repositories/*": ["src/modules/mobs/repositories/*"],
+      "@mobs/tests/*": ["src/modules/mobs/tests/*"],
+
+      "@votes/dtos/*": ["src/modules/votes/dtos/*"],
+      "@votes/entities/*": ["src/modules/votes/entities/*"],
+      "@votes/controllers/*": ["src/modules/votes/controllers/*"],
+      "@votes/services/*": ["src/modules/votes/services/*"],
+      "@votes/repositories/*": ["src/modules/votes/repositories/*"],
+      "@votes/tests/*": ["src/modules/votes/tests/*"],
+
+      "@shared/*": ["src/shared/*"],
+      "@filters/*": ["src/shared/filters/*"]
+    }
+  }
+}
