@@ -63,6 +63,11 @@ export class UsersController {
     return this.usersService.syncSteamProfile(user, syncSteamDto.steamId)
   }
 
+  @Post('desync-steam')
+  async desyncSteamProfile(@CurrentUser() user: UserLoggedDto) {
+    return this.usersService.desyncSteamProfile(user)
+  }
+
   @Put(':id')
   update(@Param('id') id: number, @Body() user: Partial<User>): Promise<User> {
     return this.usersService.update(id, user)

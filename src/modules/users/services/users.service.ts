@@ -92,6 +92,20 @@ export class UsersService {
     return toUserDto(newUser)
   }
 
+  async desyncSteamProfile(
+    @CurrentUser() userLogged: UserLoggedDto
+  ): Promise<UserDto> {
+    const idLogged = userLogged.userId
+    const user = await this.userRepository.findOneBy({ id: idLogged })
+    if (!user) {
+      throw new Error('User not found')
+    }
+
+    user.steamId = null
+    const newUser = await this.userRepository.save(user)
+    return toUserDto(newUser)
+  }
+
   async delete(id: number): Promise<void> {
     await this.userRepository.delete(id)
   }
