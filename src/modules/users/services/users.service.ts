@@ -3,9 +3,6 @@
 import * as bcrypt from 'bcrypt'
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
 
-// Auth
-import { CurrentUser } from 'src/auth/decorators'
-
 // Utils
 import { PaginatedResult } from 'src/utils/types'
 
