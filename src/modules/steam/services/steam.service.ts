@@ -1,9 +1,16 @@
+// External Libraries
 import { Injectable, HttpException, HttpStatus, Logger } from '@nestjs/common'
-import { UserLoggedDto } from 'src/auth/dto'
-import { HttpResponse } from '@services/steam/isteamuser.getfriendlist.v1.get/response'
-import { UsersRepository } from '@users/repositories/users.repository'
+
+// Services
 import { getFriends } from '@services/steam/isteamuser.getplayersummaries.v2.get'
 import { getFriendsSummaries } from '@services/steam/isteamuser.getfriendlist.v1.get'
+
+// Dtos
+import { UserLoggedDto } from 'src/auth/dto'
+import { HttpResponse } from '@services/steam/isteamuser.getfriendlist.v1.get/response'
+
+// Repositories
+import { UsersRepository } from '@users/repositories/users.repository'
 
 @Injectable()
 export class SteamService {
