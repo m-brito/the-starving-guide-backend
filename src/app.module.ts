@@ -31,8 +31,9 @@ import { BiomesModule } from './modules/biomes/biomes.module'
       autoLoadEntities: true,
       synchronize: true, // Tirar em prod
       ssl: {
-        rejectUnauthorized: false // Aceita certificados autoassinados
-      }
+        rejectUnauthorized: false
+      },
+      logging: true
     }),
     UsersModule,
     ThemesModule,
