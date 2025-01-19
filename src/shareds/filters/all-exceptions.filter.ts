@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus
 } from '@nestjs/common'
+import { ValidationError } from 'class-validator'
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -13,21 +14,38 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const response = ctx.getResponse()
     const request = ctx.getRequest()
 
-    const status =
-      exception instanceof HttpException
-        ? exception.getStatus()
-        : HttpStatus.INTERNAL_SERVER_ERROR
+    let status: number
+    let message: any
 
-    const message =
-      exception instanceof HttpException
-        ? exception.getResponse()
-        : 'Ocorreu um erro inesperado.'
+    if (exception instanceof HttpException) {
+      status = exception.getStatus()
+      const errorResponse = exception.getResponse()
+
+      if (typeof errorResponse === 'object' && errorResponse !== null) {
+        // Handling structured error responses (e.g., validation errors)
+        message = errorResponse['message'] || errorResponse
+      } else {
+        message = errorResponse
+      }
+    } else if (exception instanceof ValidationError) {
+      status = HttpStatus.BAD_REQUEST
+      message = this.formatValidationErrors(exception)
+    } else {
+      status = HttpStatus.INTERNAL_SERVER_ERROR
+      message = 'An unexpected error occurred.'
+    }
 
     response.status(status).json({
-      statusCode: status,
+      status: status,
       timestamp: new Date().toISOString(),
       path: request.url,
       message
     })
+  }
+
+  private formatValidationErrors(exception: ValidationError): any {
+    return exception.constraints
+      ? Object.values(exception.constraints)
+      : exception.children?.map(this.formatValidationErrors.bind(this))
   }
 }

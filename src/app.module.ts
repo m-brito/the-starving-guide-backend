@@ -15,6 +15,7 @@ import { SeasonsModule } from './modules/seasons/seasons.module'
 import { MobTypesModule } from './modules/mob-types/mob-types.module'
 import { CharactersModule } from './modules/characters/characters.module'
 import { VotingOptionsModule } from './modules/voting-options/voting-options.module'
+import { SteamModule } from './modules/steam/steam.module'
 
 @Module({
   imports: [
@@ -36,20 +37,21 @@ import { VotingOptionsModule } from './modules/voting-options/voting-options.mod
       },
       logging: true
     }),
-    UsersModule,
-    ThemesModule,
-    VotingsModule,
-    VotingOptionsModule,
-    CharactersModule,
+    MobsModule,
+    AuthModule,
     FoodsModule,
-    PlacesModule,
+    UsersModule,
     ItemsModule,
+    VotesModule,
+    SteamModule,
+    ThemesModule,
+    PlacesModule,
     BiomesModule,
     SeasonsModule,
+    VotingsModule,
     MobTypesModule,
-    MobsModule,
-    VotesModule,
-    AuthModule
+    CharactersModule,
+    VotingOptionsModule
   ],
   controllers: [],
   providers: []

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // External Libraries
 import * as bcrypt from 'bcrypt'
-import { Injectable } from '@nestjs/common'
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
 
 // Auth
 import { CurrentUser } from 'src/auth/decorators'
@@ -25,11 +25,7 @@ import { CreateUserDto } from '@users/dtos/create-user.dto'
 
 @Injectable()
 export class UsersService {
-  constructor(
-    // @InjectRepository(User)
-    // private userRepository: Repository<User>
-    private readonly userRepository: UsersRepository
-  ) {}
+  constructor(private readonly userRepository: UsersRepository) {}
 
   async findAll(
     page: number,
@@ -78,13 +74,13 @@ export class UsersService {
   }
 
   async syncSteamProfile(
-    @CurrentUser() userLogged: UserLoggedDto,
+    userLogged: UserLoggedDto,
     steamId: string
   ): Promise<UserDto> {
     const idLogged = userLogged.userId
     const user = await this.userRepository.findOneBy({ id: idLogged })
     if (!user) {
-      throw new Error('User not found')
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
     }
 
     user.steamId = steamId
@@ -92,13 +88,11 @@ export class UsersService {
     return toUserDto(newUser)
   }
 
-  async desyncSteamProfile(
-    @CurrentUser() userLogged: UserLoggedDto
-  ): Promise<UserDto> {
+  async desyncSteamProfile(userLogged: UserLoggedDto): Promise<UserDto> {
     const idLogged = userLogged.userId
     const user = await this.userRepository.findOneBy({ id: idLogged })
     if (!user) {
-      throw new Error('User not found')
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
     }
 
     user.steamId = null
@@ -107,6 +101,11 @@ export class UsersService {
   }
 
   async delete(id: number): Promise<void> {
+    const user = await this.userRepository.findOneBy({ id })
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+
     await this.userRepository.delete(id)
   }
 }

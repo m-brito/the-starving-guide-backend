@@ -121,7 +121,11 @@
       "@auth/types/*": ["src/auth/types/*"],
       "@auth/services/*": ["src/auth/services/*"],
       "@auth/controllers*": ["src/auth/controllers*"],
-      "@auth/strategies/*": ["src/auth/strategies/*"]
+      "@auth/strategies/*": ["src/auth/strategies/*"],
+
+      "@services/steam/*": ["src/services/steam/*"],
+      "@steam/controllers/*": ["src/services/steam/controllers/*"],
+      "@steam/services/*": ["src/services/steam/services/*"]
     }
   }
 }
