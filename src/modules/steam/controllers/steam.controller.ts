@@ -7,7 +7,7 @@ import { JwtAuthGuard } from 'src/auth/guards'
 import { CurrentUser } from 'src/auth/decorators'
 
 // Dtos
-import { HttpResponse } from '@services/steam/isteamuser.getfriendlist.v1.get/response'
+import { SteamPlayerDto } from '../dtos/friendSummarieDto'
 
 // Services
 import { UserLoggedDto } from 'src/auth/dto'
@@ -19,7 +19,7 @@ export class SteamController {
   constructor(private readonly steamService: SteamService) {}
 
   @Get('get-friends')
-  findOne(@CurrentUser() user: UserLoggedDto): Promise<HttpResponse> {
+  findOne(@CurrentUser() user: UserLoggedDto): Promise<SteamPlayerDto[]> {
     return this.steamService.findFriends(user)
   }
 }

@@ -2,12 +2,15 @@
 import { Injectable, HttpException, HttpStatus, Logger } from '@nestjs/common'
 
 // Services
-import { getFriends } from '@services/steam/isteamuser.getplayersummaries.v2.get'
-import { getFriendsSummaries } from '@services/steam/isteamuser.getfriendlist.v1.get'
+import { getFriendsSummaries } from '@services/steam/isteamuser.getplayersummaries.v2.get'
+import { getFriends } from '@services/steam/isteamuser.getfriendlist.v1.get'
+
+// Utils
+import { toFriendSummarieDto } from '../mappers'
 
 // Dtos
 import { UserLoggedDto } from 'src/auth/dto'
-import { HttpResponse } from '@services/steam/isteamuser.getfriendlist.v1.get/response'
+import { SteamPlayerDto } from '../dtos/friendSummarieDto'
 
 // Repositories
 import { UsersRepository } from '@users/repositories/users.repository'
@@ -18,10 +21,14 @@ export class SteamService {
 
   constructor(private readonly userRepository: UsersRepository) {}
 
-  async findFriends(userLogged: UserLoggedDto): Promise<HttpResponse> {
+  async findFriends(userLogged: UserLoggedDto): Promise<SteamPlayerDto[]> {
+    // console.log(JSON.stringify(friendsSummaries, null, 2))
     const user = await this.getUseById(userLogged.userId)
     const steamFriends = await this.fetchSteamFriends(user.steamId)
-    return await this.fetchFriendsSummaries(steamFriends)
+    const friendsSummaries = await this.fetchFriendsSummaries(steamFriends)
+    return friendsSummaries?.response?.players?.map(friend => {
+      return toFriendSummarieDto(friend)
+    })
   }
 
   private async getUseById(userId: number) {
@@ -50,7 +57,9 @@ export class SteamService {
         )
       }
 
-      return friends.friendslist.friends.map(friend => friend.steamid).join(',')
+      return friends?.friendslist?.friends
+        .map(friend => friend?.steamid)
+        .join(',')
     } catch (error) {
       this.logger.error('Error fetching Steam friends', error.stack)
       throw new HttpException(

@@ -1,3 +1,3 @@
 export interface HttpGetFriendsParams {
-  steamIds: string
+  steamid: string
 }

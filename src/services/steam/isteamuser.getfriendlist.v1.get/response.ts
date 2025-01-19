@@ -1,25 +1,11 @@
 export interface HttpResponse {
-  players: SteamPlayer[]
+  friendslist: {
+    friends: Friend[]
+  }
 }
 
-export interface SteamPlayer {
+export interface Friend {
   steamid: string
-  communityvisibilitystate: number
-  profilestate: number
-  personaname: string
-  profileurl: string
-  avatar: string
-  avatarmedium: string
-  avatarfull: string
-  avatarhash: string
-  lastlogoff: number
-  personastate: number
-  realname?: string
-  primaryclanid?: string
-  timecreated?: number
-  personastateflags?: number
-  loccountrycode?: string
-  locstatecode?: string
-  loccityid?: number
-  commentpermission?: number
+  relationship: string
+  friend_since: number
 }
