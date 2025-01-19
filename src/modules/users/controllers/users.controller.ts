@@ -15,6 +15,7 @@ import {
 
 // Auth
 import { JwtAuthGuard } from 'src/auth/guards'
+import { CurrentUser } from 'src/auth/decorators'
 
 // Entities
 import { User } from 'src/modules/users/entities'
@@ -26,7 +27,9 @@ import { UsersService } from 'src/modules/users/services'
 import { PaginatedResult } from 'src/utils/types'
 
 // Dtos
+import { UserLoggedDto } from 'src/auth/dto'
 import { UserDto } from '@users/dtos/user.dto'
+import { SyncSteamDto } from '@users/dtos/sync-steam.dto'
 import { CreateUserDto } from '@users/dtos/create-user.dto'
 
 @Controller('users')
@@ -50,6 +53,14 @@ export class UsersController {
   @Post()
   async createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto)
+  }
+
+  @Post('sync-steam')
+  async syncSteamProfile(
+    @Body() syncSteamDto: SyncSteamDto,
+    @CurrentUser() user: UserLoggedDto
+  ) {
+    return this.usersService.syncSteamProfile(user, syncSteamDto.steamId)
   }
 
   @Put(':id')

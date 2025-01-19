@@ -4,7 +4,10 @@ import * as bcrypt from 'bcrypt'
 import { Injectable } from '@nestjs/common'
 
 // Auth
-// import { CurrentUser } from 'src/auth/decorators/current-user.decorator'
+import { CurrentUser } from 'src/auth/decorators'
+
+// Utils
+import { PaginatedResult } from 'src/utils/types'
 
 // Mappers
 import { toUserDto } from '../mappers/toUserDto'
@@ -16,10 +19,9 @@ import { User } from 'src/modules/users/entities/user.entity'
 import { UsersRepository } from '@users/repositories/users.repository'
 
 // Dtos
+import { UserLoggedDto } from 'src/auth/dto'
 import { UserDto } from '@users/dtos/user.dto'
 import { CreateUserDto } from '@users/dtos/create-user.dto'
-// import { UserLoggedDto } from 'src/auth/dto/user-logged.dto'
-import { PaginatedResult } from 'src/utils/types'
 
 @Injectable()
 export class UsersService {
@@ -73,6 +75,21 @@ export class UsersService {
   async update(id: number, user: Partial<User>): Promise<User> {
     await this.userRepository.update(id, user)
     return this.findOne(id)
+  }
+
+  async syncSteamProfile(
+    @CurrentUser() userLogged: UserLoggedDto,
+    steamId: string
+  ): Promise<UserDto> {
+    const idLogged = userLogged.userId
+    const user = await this.userRepository.findOneBy({ id: idLogged })
+    if (!user) {
+      throw new Error('User not found')
+    }
+
+    user.steamId = steamId
+    const newUser = await this.userRepository.save(user)
+    return toUserDto(newUser)
   }
 
   async delete(id: number): Promise<void> {

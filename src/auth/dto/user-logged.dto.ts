@@ -1,4 +1,4 @@
 export class UserLoggedDto {
-  userId: string
+  userId: number
   email: string
 }

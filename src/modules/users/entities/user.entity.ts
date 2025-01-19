@@ -40,6 +40,9 @@ export class User {
   @Column()
   role: string
 
+  @Column({ nullable: true })
+  steamId?: string
+
   @CreateDateColumn()
   created_at: Date
 

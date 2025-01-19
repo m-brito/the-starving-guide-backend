@@ -6,4 +6,5 @@ export class UserDto {
   created_at: Date
   updated_at: Date
   image?: string
+  steamId?: string
 }
