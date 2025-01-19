@@ -19,6 +19,7 @@ import { UsersRepository } from '@users/repositories/users.repository'
 import { UserDto } from '@users/dtos/user.dto'
 import { CreateUserDto } from '@users/dtos/create-user.dto'
 import { UserLoggedDto } from 'src/auth/dto/user-logged.dto'
+import { PaginatedResult } from 'src/utils/types'
 
 @Injectable()
 export class UsersService {
@@ -28,10 +29,23 @@ export class UsersService {
     private readonly userRepository: UsersRepository
   ) {}
 
-  async findAll(@CurrentUser() user: UserLoggedDto): Promise<UserDto[]> {
-    const users = await this.userRepository.find()
+  async findAll(
+    page: number,
+    limit: number
+  ): Promise<PaginatedResult<UserDto>> {
+    const skip = (page - 1) * limit
+    const [users, total] = await this.userRepository.findAndCount({
+      skip,
+      take: limit,
+      order: { created_at: 'DESC' }
+    })
 
-    return users.map(user => toUserDto(user))
+    return {
+      data: users.map(user => toUserDto(user)),
+      total,
+      page,
+      lastPage: Math.ceil(total / limit)
+    }
   }
 
   findOne(id: number): Promise<User> {

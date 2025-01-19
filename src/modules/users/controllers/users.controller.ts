@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // External Libraries
 import {
   Put,
@@ -8,7 +9,8 @@ import {
   Delete,
   UseGuards,
   Controller,
-  Request
+  Request,
+  Query
 } from '@nestjs/common'
 
 // Auth
@@ -20,9 +22,12 @@ import { User } from 'src/modules/users/entities/user.entity'
 // Services
 import { UsersService } from 'src/modules/users/services/users.service'
 
+// Types
+import { PaginatedResult } from 'src/utils/types'
+
 // Dtos
-import { CreateUserDto } from '@users/dtos/create-user.dto'
 import { UserDto } from '@users/dtos/user.dto'
+import { CreateUserDto } from '@users/dtos/create-user.dto'
 
 @Controller('users')
 @UseGuards(JwtAuthGuard)
@@ -30,9 +35,11 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  findAll(@Request() req): Promise<UserDto[]> {
-    const loggedUser = req.user
-    return this.usersService.findAll(loggedUser)
+  async findAll(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10
+  ): Promise<PaginatedResult<UserDto>> {
+    return this.usersService.findAll(Number(page), Number(limit))
   }
 
   @Get(':id')
