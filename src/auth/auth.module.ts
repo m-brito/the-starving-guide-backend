@@ -5,14 +5,14 @@ import { PassportModule } from '@nestjs/passport'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 
 // Services
-import { AuthService } from './services/auth.service'
+import { AuthService } from './services'
 
 // Controllers
-import { AuthController } from './controllers/auth.controller'
+import { AuthController } from './controllers'
 
 // Strategies
-import { JwtStrategy } from './strategies/jwt.strategy'
-import { LocalStrategy } from './strategies/local.strategy'
+import { JwtStrategy } from './strategies'
+import { LocalStrategy } from './strategies'
 
 import { UsersModule } from 'src/modules/users/users.module'
 

@@ -14,13 +14,13 @@ import {
 } from '@nestjs/common'
 
 // Auth
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
+import { JwtAuthGuard } from 'src/auth/guards'
 
 // Entities
-import { User } from 'src/modules/users/entities/user.entity'
+import { User } from 'src/modules/users/entities'
 
 // Services
-import { UsersService } from 'src/modules/users/services/users.service'
+import { UsersService } from 'src/modules/users/services'
 
 // Types
 import { PaginatedResult } from 'src/utils/types'

@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt'
 import { Injectable } from '@nestjs/common'
 
 // Auth
-import { CurrentUser } from 'src/auth/decorators/current-user.decorator'
+// import { CurrentUser } from 'src/auth/decorators/current-user.decorator'
 
 // Mappers
 import { toUserDto } from '../mappers/toUserDto'
@@ -18,7 +18,7 @@ import { UsersRepository } from '@users/repositories/users.repository'
 // Dtos
 import { UserDto } from '@users/dtos/user.dto'
 import { CreateUserDto } from '@users/dtos/create-user.dto'
-import { UserLoggedDto } from 'src/auth/dto/user-logged.dto'
+// import { UserLoggedDto } from 'src/auth/dto/user-logged.dto'
 import { PaginatedResult } from 'src/utils/types'
 
 @Injectable()
